@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "CheckerZ - TitleScreen";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div> 
+
+<div class="text-center mt-5">
+    <h1 class="display-4">CheckerZ</h1>
+    <p>Select an option:</p>
+
+    <div class="mt-4">
+        <a asp-page="./UserLogin" class="btn btn-primary btn-lg m-2">Start Game</a>
+
+        <a asp-page="/Players/Index" class="btn btn-secondary btn-lg m-2">Manage Data</a>
+    </div>
+</div>

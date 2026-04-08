@@ -1,0 +1,60 @@
+﻿@page
+@model CheckerZ_Server.Pages.Games.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="mb-4">
+	<div class="mb-3">
+		<a asp-page="/Players/Index" class="btn btn-primary btn">Show Players</a>
+	</div>
+	<form method="post" asp-page-handler="GamesByName">
+		<div class="mb-3">
+			@Html.DropDownList("name", new SelectList(Model.Names), "All Names" ,new { @onchange = "this.form.submit()" })
+		</div>
+	</form>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].Player)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].GameDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].Duration)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].GameOutcome)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Games)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Player.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.GameDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Duration)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.GameOutcome)
+				</td>
+				<td>
+					<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

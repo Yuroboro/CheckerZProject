@@ -1,0 +1,33 @@
+﻿@page
+@model CheckerZ_Server.Pages.Queries.CountriesWithMostGamesModel
+@{
+	ViewData["Title"] = "Top 2 Countries";
+}
+
+<h1>Top 2 Countries</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Country
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TopTwoCountries[0].Amount)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.TopTwoCountries)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Amount)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

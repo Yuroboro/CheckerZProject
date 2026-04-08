@@ -1,0 +1,33 @@
+﻿@page
+@model CheckerZ_Server.Pages.Queries.PlayerGameAmountModel
+@{
+	ViewData["Title"] = "Player game amount";
+}
+
+<h1>Player Game Amount</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Player
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.GameAmounts[0].Amount)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.GameAmounts)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Amount)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

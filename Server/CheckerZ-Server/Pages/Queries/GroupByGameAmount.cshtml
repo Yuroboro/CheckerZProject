@@ -1,0 +1,60 @@
+﻿@page
+@model CheckerZ_Server.Pages.Queries.GroupByGameAmountModel
+@{
+	ViewData["Title"] = "Group By Game Amount Model";
+
+	int? currentGameCount = null;
+}
+
+<h1>Group By Game Amount Model</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.gameAmountGroups[0].Games.Count)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.gameAmountGroups[0].Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.gameAmountGroups[0].PhoneNumber)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.gameAmountGroups[0].Country)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.gameAmountGroups)
+		{
+			if (currentGameCount != item.Games.Count)
+			{
+				currentGameCount = item.Games.Count;
+
+				<tr class="table-active">
+					<td colspan="3" style="border-bottom: 2px solid #333; padding-top: 20px;">
+						<strong>Players with @currentGameCount Game(s)</strong>
+					</td>
+				</tr>
+			}
+
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Games.Count)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PhoneNumber)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Country)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

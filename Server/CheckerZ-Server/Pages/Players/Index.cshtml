@@ -1,0 +1,63 @@
+﻿@page
+@model CheckerZ_Server.Pages.Players.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="d-flex align-items-center gap-2 mt-4">
+	@*Filters the data on post*@
+	<form method="post" class="d-inline-flex gap-2 mb-0">
+		<button asp-page="" asp-page-handler="ShowPlayerData" class="btn btn-primary btn" type="submit">Show Players who played</button>
+
+		<button asp-page="" asp-page-handler="ShowFirstPlayerByCountry" class="btn btn-primary btn" type="submit">Show 1st Player By Country</button>
+
+		<button asp-page="" asp-page-handler="SortByCountries" class="btn btn-primary btn" type="submit">Sort By Countries</button>
+
+	</form>
+	@*Move to games page*@
+	<a asp-page="/Games/Index" class="btn btn-primary btn">Show Games</a>
+	<a asp-page="/Queries/RecentGame" class="btn btn-primary btn">Show Recent Game Dates</a>
+	<a asp-page="/Queries/PlayerGameAmount" class="btn btn-primary btn">Show Amount of games per player</a>
+	<a asp-page="/Queries/CountriesWithMostGames" class="btn btn-primary btn">Show Top 2 Countries</a>
+	<a asp-page="/Queries/GroupByGameAmount" class="btn btn-primary btn">Group by game amount</a>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Players[0].Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Players[0].PhoneNumber)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Players[0].Country)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Players)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.PhoneNumber)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Country)
+				</td>
+				<td>
+					<a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

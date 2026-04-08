@@ -1,0 +1,97 @@
+﻿@page
+@model CheckerZ_Server.Pages.Players.RegisterModel
+
+@*Name of the subpage*@
+@{
+    ViewData["Title"] = "Register";
+}
+
+@*Headline of the page*@
+<h1>Register</h1>
+
+@*Text*@
+<h4>Enter players for session</h4>
+
+@*Line between text and inserting data*@
+<hr />
+
+
+
+
+<div>
+    <form method="post">
+
+        <div class="row mb-3">
+            @**@
+            <div class="col-3">
+                <label for="numPlayersSelect" class="form-label">How many players?</label>
+            </div>
+
+            <div class="col-2">
+                <select asp-for="NumPlayers"
+                        asp-items="@(new SelectList(Model.PlayerAmountRange))"
+                        class="form-select"
+                        id="numPlayersSelect"
+                        onchange="this.form.action='?handler=RowAmount'; this.form.submit();">
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="row mb-1">
+            <div class="col-2 ">
+                <label asp-for="Players[0].Id" class="from-label"> </label>
+            </div>
+
+            <div class="col-3 ">
+                <label asp-for="Players[0].Name" class="form-label"></label>
+            </div>
+
+            <div class="col-3 ">
+                <label asp-for="Players[0].PhoneNumber" class="form-label"> </label>
+            </div>
+            <div class="col-3 ">
+                <label asp-for="Players[0].Country" class="form-label"></label>
+            </div>
+        </div>
+
+        @for (int i = 0; i < Model.NumPlayers; i++)
+        {
+
+            <div class="row mb-3">
+                <div class="col-2">
+                    <input asp-for="Players[i].Id" value="1" min="1" max="1000" step="1" class="form-control" />
+                    <span asp-validation-for="Players[i].Id" class="text-danger"></span>
+                </div>
+
+                <div class="col-3">
+                    <input asp-for="Players[i].Name" class="form-control" />
+                    <span asp-validation-for="Players[i].Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-3 ">
+                    <input asp-for="Players[i].PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Players[i].PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-3 ">
+                    @Html.DropDownList($"Players[{i}].Country", new SelectList(Model.countries))
+                </div>
+            </div>
+        }
+
+        <div class="form-group mt-3">
+            <button asp-page="" class="btn btn-primary">Register</button>
+        </div>
+        <div asp-validation-summary="All" class="text-danger mt-3"></div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
